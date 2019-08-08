@@ -1,0 +1,39 @@
+opcua_server:
+    url: opc.tcp://milo.digitalpetri.com:62541/milo
+    username: # admin
+    password: # YWRtaW4=   admin
+    block:
+       '01':
+          frequency:
+            - ns=2;s=Dynamic/RandomFloat
+            - #ns=2;s=Dynamic/RandomInt32
+          power:
+            - ns=2;s=Dynamic/RandomDouble
+            - 
+          target_power:
+            - #ns=2;s=Dynamic/RandomDouble
+            - ns=2;s=Dynamic/RandomInt32
+          quality:
+            - ns=2;s=Dynamic/RandomIn64
+            - 
+
+#       02:
+#          frequency:
+#            - #ns=2;s=Dynamic/RandomDouble
+#            - ns=2;s=Dynamic/RandomInt32
+#          power:
+#            - ns=2;s=Dynamic/RandomDouble
+#            - 
+#          target_power:
+#            - ns=2;s=Dynamic/RandomDouble
+#            - #ns=2;s=Dynamic/RandomInt32
+#          quality:
+#            - ns=2;s=Dynamic/RandomDouble
+#            - 
+
+influxdb:
+    host: localhost
+    port: 8086
+    username: #manjaro
+    password: #R3RuaGpkZjE=  # Gtnhjdf1
+    mydb: sync
