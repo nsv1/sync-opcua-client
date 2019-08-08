@@ -51,6 +51,7 @@ if __name__ == "__main__":
     url = settings['opcua_server']['url']
     ua_username = settings['opcua_server']['username']
     ua_password = encrypt(settings['opcua_server']['password'])
+    ua_period = settings['opcua_server']['period_subsription']
     # Set inflaxdb param
     host = settings['influxdb']['host']
     port = settings['influxdb']['port']
@@ -67,8 +68,7 @@ if __name__ == "__main__":
                                username=username, password=password)
 
     listdb = client_db.get_list_database()
-    if mydb not in listdb:
-        client_db.create_database(mydb)
+    client_db.create_database(mydb)
     client_db.switch_database(mydb)
 
     client_ua = Client(url)
@@ -80,9 +80,9 @@ if __name__ == "__main__":
         for i in nodes:
             myvar.append(client_ua.get_node(i))
         handler = SubHandler()
-        sub = client_ua.create_subscription(5000, handler)
+        sub = client_ua.create_subscription(ua_period, handler)
         handle = sub.subscribe_data_change(myvar)
-        print('Subscribe data')
+        print('Subscribe data_change with period {} ms'.format(ua_period))
 #        time.sleep(5)
         input("Press Enter to continue...")
         for i in handle:
@@ -93,6 +93,7 @@ if __name__ == "__main__":
 
     finally:
         try:
+            client_db.close()
             client_ua.disconnect()
         except concurrent.futures._base.TimeoutError:
             print('TimeoutError')

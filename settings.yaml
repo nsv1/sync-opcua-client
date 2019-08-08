@@ -2,6 +2,7 @@ opcua_server:
     url: opc.tcp://milo.digitalpetri.com:62541/milo
     username: # admin
     password: # YWRtaW4=   admin
+    period_subsription: 500
     block:
        '01':
           frequency:
