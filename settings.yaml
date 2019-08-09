@@ -1,3 +1,4 @@
+# Параметры OPC UA
 opcua_server:
     url: opc.tcp://milo.digitalpetri.com:62541/milo
     username: # admin
@@ -31,10 +32,15 @@ opcua_server:
 #          quality:
 #            - ns=2;s=Dynamic/RandomDouble
 #            - 
-
+# Параметры INFLUXDB
 influxdb:
     host: localhost
     port: 8086
     username: #manjaro
     password: #R3RuaGpkZjE=  # Gtnhjdf1
     mydb: sync
+
+# Параметры архивного хранилища
+
+filestorige:
+    path: "./data" # or "C:/Users/SNikolaev/.spyder-py3/practice/SyncOPCUAClient/data" (check slash)
