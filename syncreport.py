@@ -12,15 +12,15 @@ def check_file(path, block, date_time):
 
 
 def make_file(block, date_time):
-    query_where = 'select value, quality \
-                    from power, target_power, frequency \
-                    where block=$block;'
-    bind_params = {'block': block}
-    result = client.query(query_where, bind_params=bind_params)
-
+    dt = date_time.strftime("%Y-%m-%dT%H:00:00Z")
+    query_where = "select value, quality from power, frequency \
+                    where block='{0}' and time>='{1}' and time<'{1}'+1h;".format(block, dt)
+    result = client.query(query_where)
+    result.raw
 
 def make_report():
-    date_time = datetime.now() - timedelta(seconds=3600)
+    date_time = datetime.now() - timedelta(seconds=3600) - \
+                timedelta(seconds=timeshift*3600)
     for i in blocks:
         if not check_file(path, i, date_time):
             make_file(i, date_time)
@@ -34,7 +34,8 @@ if __name__ == "__main__":
     username = settings['influxdb']['username']
     password = encrypt(settings['influxdb']['password'])
     mydb = settings['influxdb']['mydb']
-    path = settings['filestorige']['path']
+    path = settings['syncreport']['filestorige']['path']
+    timeshift = settings['syncreport']['timeshift']
     blocks = settings['opcua_server']['block']
 
     client = InfluxDBClient(host=host, port=port,

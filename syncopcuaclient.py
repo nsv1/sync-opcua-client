@@ -30,7 +30,7 @@ class SubHandler(object):
         status = data.monitored_item.Value.StatusCode.name
         json_body = [{
             "measurement": measurement,
-            "tags": {"blok": block},
+            "tags": {"block": block},
             "time": timestamp,
             "fields": {"value": val,
                        "quality": status}

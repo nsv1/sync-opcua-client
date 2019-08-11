@@ -3,9 +3,9 @@ opcua_server:
     url: opc.tcp://milo.digitalpetri.com:62541/milo
     username: # admin
     password: # YWRtaW4=   admin
-    period_subsription: 500
+    period_subsription: 5000
     block:
-       '01':
+       "01":
           frequency:
             - ns=2;s=Dynamic/RandomFloat
             - #ns=2;s=Dynamic/RandomInt32
@@ -41,6 +41,7 @@ influxdb:
     mydb: sync
 
 # Параметры архивного хранилища
-
-filestorige:
-    path: "./data" # or "C:/Users/SNikolaev/.spyder-py3/practice/SyncOPCUAClient/data" (check slash)
+syncreport:
+    timeshift: 3
+    filestorige:
+        path: "./data" # or "C:/Users/SNikolaev/.spyder-py3/practice/SyncOPCUAClient/data" (check slash)
