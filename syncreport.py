@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from influxdb import InfluxDBClient
+from influxdb import InfluxDBClient, DataFrameClient
 from datetime import datetime, timedelta
 from settings import readsettings, encrypt
 import os
@@ -12,15 +12,20 @@ def check_file(path, block, date_time):
 
 
 def make_file(block, date_time):
+    block = '01'
+    date_time = datetime.now() - timedelta(seconds=(timeshift+1)*3600)
     dt = date_time.strftime("%Y-%m-%dT%H:00:00Z")
     query_where = "select value, quality from power, frequency \
-                    where block='{0}' and time>='{1}' and time<'{1}'+1h;".format(block, dt)
+                    where block='{0}';".format(block, dt)
     result = client.query(query_where)
-    result.raw
+#    result.raw
+#    y = result.items()
+#    y = [i for i in y[0][1]]
+#    print(y)
+    result['power']
 
 def make_report():
-    date_time = datetime.now() - timedelta(seconds=3600) - \
-                timedelta(seconds=timeshift*3600)
+    date_time = datetime.now() - timedelta(seconds=(timeshift+1)*3600)
     for i in blocks:
         if not check_file(path, i, date_time):
             make_file(i, date_time)
@@ -38,7 +43,9 @@ if __name__ == "__main__":
     timeshift = settings['syncreport']['timeshift']
     blocks = settings['opcua_server']['block']
 
-    client = InfluxDBClient(host=host, port=port,
+#    client = InfluxDBClient(host=host, port=port,
+#                            username=username, password=password)
+    client = DataFrameClient(host=host, port=port,
                             username=username, password=password)
 
     listdb = client.get_list_database()
