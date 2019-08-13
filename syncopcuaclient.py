@@ -23,11 +23,11 @@ class SubHandler(object):
 #            data.monitored_item.Value.StatusCode.name
 #              )
 
-        timestamp = data.monitored_item.Value.SourceTimestamp.strftime(
-                "%Y-%m-%dT%H:%M:%S.%f")
         block, measurement = nodes[node.nodeid.to_string()]
 #        print(block, measurement)
         status = data.monitored_item.Value.StatusCode.name
+        timestamp = data.monitored_item.Value.SourceTimestamp.strftime(
+                "%Y-%m-%dT%H:%M:%S.%f")
         json_body = [{
             "measurement": measurement,
             "tags": {"block": block},
@@ -36,10 +36,8 @@ class SubHandler(object):
                        "quality": status}
             }]
         client_db.write_points(json_body)
-#        print('Write point {} to db'.format(node.nodeid.to_string()))
-#        print('________________________________\n')
-
-
+#        print(block, measurement, val, status)
+#
 #    def event_notification(self, event):
 #        print("Python: New event", event)
 

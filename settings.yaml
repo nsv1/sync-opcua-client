@@ -3,35 +3,40 @@ opcua_server:
     url: opc.tcp://milo.digitalpetri.com:62541/milo
     username: # admin
     password: # YWRtaW4=   admin
-    period_subsription: 5000
+    period_subsription: 500
     block:
-       "01":
-          frequency:
-            - ns=2;s=Dynamic/RandomFloat
-            - #ns=2;s=Dynamic/RandomInt32
-          power:
-            - ns=2;s=Dynamic/RandomDouble
-            - 
-          target_power:
-            - #ns=2;s=Dynamic/RandomDouble
-            - ns=2;s=Dynamic/RandomInt32
-          quality:
-            - ns=2;s=Dynamic/RandomIn64
-            - 
+        "01":
+            frequency:
+                node_id:
+                    - ns=2;s=Dynamic/RandomFloat
+                    - ns=2;s=Dynamic/RandomDouble
+                range:
+                    min: 0.1
+                    max: 1.0
+            power:
+                node_id:
+                    - ns=2;s=Dynamic/RandomFloat
+                    - ns=2;s=Dynamic/RandomDouble 
+                range:
+                    min: 0.1
+                    max: 1.0
+            target_power:
+                node_id:
+                    - ns=2;s=Dynamic/RandomFloat
+                    - ns=2;s=Dynamic/RandomDouble
+                range:
+                    min: 0.1
+                    max: 1.0
+            quality:
+                node_id:
+                    - ns=2;s=Dynamic/RandomFloat
+                    - ns=2;s=Dynamic/RandomDouble
+                range:
+                    min: 0.1
+                    max: 1.0
 
-#       02:
-#          frequency:
-#            - #ns=2;s=Dynamic/RandomDouble
-#            - ns=2;s=Dynamic/RandomInt32
-#          power:
-#            - ns=2;s=Dynamic/RandomDouble
-#            - 
-#          target_power:
-#            - ns=2;s=Dynamic/RandomDouble
-#            - #ns=2;s=Dynamic/RandomInt32
-#          quality:
-#            - ns=2;s=Dynamic/RandomDouble
-#            - 
+
+
 # Параметры INFLUXDB
 influxdb:
     host: localhost

@@ -9,7 +9,7 @@ def readsettings(file):
     settings = yaml.load(doc, Loader=yaml.FullLoader)
     for i in settings['opcua_server']['block']:
         for j in settings['opcua_server']['block'][i]:
-            for k in settings['opcua_server']['block'][i][j]:
+            for k in settings['opcua_server']['block'][i][j]['node_id']:
                 if k is not None:
                     nodeids[k] = (i, j)
     return settings, nodeids
