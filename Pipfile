@@ -11,8 +11,9 @@ cryptography = "*"
 pyqt5 = "*"
 pyqtgraph = "*"
 numpy = "*"
-python-influxdb = "*"
 pyyaml = "*"
+pandas = "*"
+influxdb = "*"
 
 [requires]
 python_version = "3.7"

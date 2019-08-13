@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from influxdb import InfluxDBClient, DataFrameClient
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from settings import readsettings, encrypt
 import numpy as np
 import pandas as pd
@@ -30,9 +30,11 @@ def make_file(block, date_time):
     for i in result:
         df = result[i]
         # округляем до секунд
-        df.index = df.index.round('S')
+        df.index = df.index.round('S').replace(tzinfo=timezone.utc)
+
         # приводим к сеундам
-        df.index = df.index - date_time.timestamp()
+        df.index = df.index - date_time.replace(tzinfo=timezone.utc)
+
         # группируем и находим среднее значение в группе
         df.pivot_table(values='value', index=df.index, 
                        aggfunc=np.mean, fill_value=0)
@@ -45,10 +47,10 @@ def make_file(block, date_time):
         
 
 def make_report():
-    now = datetime.now()
+    now = datetime.utcnow()
     # Определение текущей даты и часа со смещением часа (shift+1)
     date_time = now - timedelta(
-            hours=timeshift+1,
+            hours=1,
             minutes=now.minute,
             seconds=now.second,
             microseconds=now.microsecond)
