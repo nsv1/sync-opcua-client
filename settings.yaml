@@ -1,36 +1,37 @@
 # Параметры OPC UA
 opcua_server:
-    url: opc.tcp://milo.digitalpetri.com:62541/milo
+    url: opc.tcp://opcua.demo-this.com:51210/ua/sampleserver #opc.tcp://milo.digitalpetri.com:62541/milo
     username: # admin
     password: # YWRtaW4=   admin
     period_subsription: 500
+    timeshift: 0
     block:
         "01":
             frequency:
                 node_id:
-                    - ns=2;s=Dynamic/RandomFloat
-                    - ns=2;s=Dynamic/RandomDouble
+                    - 'ns=2;i=10845'#ns=2;s=Dynamic/RandomFloat
+                    - 
                 range:
                     min: 0.1
                     max: 1.0
             power:
                 node_id:
-                    - ns=2;s=Dynamic/RandomFloat
-                    - ns=2;s=Dynamic/RandomDouble 
+                    - 'ns=2;i=10846'
+                    - #ns=2;s=Dynamic/RandomDouble 
                 range:
                     min: 0.1
                     max: 1.0
             target_power:
                 node_id:
-                    - ns=2;s=Dynamic/RandomFloat
-                    - ns=2;s=Dynamic/RandomDouble
+                    - #ns=2;s=Dynamic/RandomInt32
+                    - 'ns=2;i=11170'
                 range:
                     min: 0.1
                     max: 1.0
             quality:
                 node_id:
-                    - ns=2;s=Dynamic/RandomFloat
-                    - ns=2;s=Dynamic/RandomDouble
+                    - 'ns=2;i=11176'
+                    -
                 range:
                     min: 0.1
                     max: 1.0
@@ -47,6 +48,6 @@ influxdb:
 
 # Параметры архивного хранилища
 syncreport:
-    timeshift: 3
+    timeshift: 0
     filestorige:
         path: "./data" # or "C:/Users/SNikolaev/.spyder-py3/practice/SyncOPCUAClient/data" (check slash)
