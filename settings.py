@@ -19,6 +19,15 @@ def nodes(settings):
     return nodeids
 
 
+def set_ranges(settings):
+    ranges = {}
+    for i in settings['opcua_server']['block']:
+        for j in settings['opcua_server']['block'][i]:
+            for k in settings['opcua_server']['block'][i][j]['range']:
+                ranges[(i, j, k)] = settings['opcua_server']['block'][i][j]['range'][k]
+    return ranges
+
+
 def write(file):
     pass
 
@@ -67,6 +76,8 @@ class Set:
     ua_period = settings['opcua_server']['period_subsription']
     ua_timeshift = settings['opcua_server']['timeshift']
     ua_nodes = nodes(settings)
+    # Range of nodes
+    ranges = set_ranges(settings)
     # INFLUXDB
     infl_host = settings['influxdb']['host']
     infl_port = settings['influxdb']['port']
