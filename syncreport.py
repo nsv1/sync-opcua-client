@@ -8,8 +8,10 @@ import os
 
 
 def make_path(path, block, date_hour):
+    block = "01"
     path += '/{}{}'.format(block, date_hour.strftime('/%Y/%m/%d'))
-    file = '{}{}.txt.zip'.format(block, date_hour.strftime('%Y%m%d%H'))
+    os.makedirs(path)
+    name_file = '{}{}.txt.zip'.format(block, date_hour.strftime('%Y%m%d%H'))
     return True if file in os.listdir(path) else False
 
 
@@ -17,18 +19,33 @@ def check_quality(df, block, measurement):
     q = []
     for i in df.index:
         if (
-            df.at[i, 'quality'] != 'Good' or
-            df.at[i, 'value'] > Set.ranges[(block, measurement, 'max')] or
-            df.at[i, 'value'] < Set.ranges[(block, measurement, 'min')]
+            df.loc[i, 'quality'] != 'Good' or
+            df.loc[i, 'value'] > Set.ranges[(block, measurement, 'max')] or
+            df.loc[i, 'value'] < Set.ranges[(block, measurement, 'min')]
             ):
             q.append(i)
     return q
 
 
+def get_last_value(measurement):
+#            FIX IT    
+    pass
+
+
 def filling_naan(df, measurement):
+    list_nan = []
     for i in df.index[::-1]:
-        if df.loc[i, measurement]:          
-#            FIX IT
+        if np.isnan(df.loc[i, measurement]):          
+            list_nan.append(i)
+            last_value = get_last_value(measurement)
+            if i==0 and last_value:
+                for j in list_nan:
+                    df.loc[j, measurement] = last_value
+        elif len(list_nan):
+            for j in list_nan:
+                df.loc[j, measurement] = df.loc[i, measurement]
+            list_nan = []
+
 
 def make_df(block, date_hour):
 #    block = "01"
