@@ -51,3 +51,8 @@ syncreport:
     timeshift: 0
     filestorige:
         path: "./data" # or "C:/Users/SNikolaev/.spyder-py3/practice/SyncOPCUAClient/data" (check slash)
+    sequence:
+        - frequency
+        - power
+        - target_power
+        - quality

@@ -38,6 +38,7 @@ class SubHandler(object):
                        "quality": status}
             }]
         client_db.write_points(json_body)
+#        print(timestamp)
 #        print(block, measurement, val, status)
 
     def event_notification(self, event):

@@ -88,6 +88,7 @@ class Set:
     sr_path = settings['syncreport']['filestorige']['path']
     sr_timeshift = settings['syncreport']['timeshift']
     sr_blocks = settings['opcua_server']['block']
+    sr_sequence = settings['syncreport']['sequence']
     
 #
 #
