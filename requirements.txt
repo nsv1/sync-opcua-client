@@ -1,0 +1,23 @@
+-i https://pypi.org/simple
+asn1crypto==0.24.0
+certifi==2019.6.16
+cffi==1.12.3
+chardet==3.0.4
+cryptography==2.7
+idna==2.8
+influxdb==5.2.3
+lxml==4.4.1
+numpy==1.17.0
+opcua==0.98.7
+pandas==0.25.1
+pycparser==2.19
+pyqt5-sip==4.19.18
+pyqt5==5.13.0
+pyqtgraph==0.10.0
+python-dateutil==2.8.0
+pytz==2019.2
+pyyaml==5.1.2
+requests==2.22.0
+schedule==0.6.0
+six==1.12.0
+urllib3==1.25.3

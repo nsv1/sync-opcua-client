@@ -68,7 +68,7 @@ class Set:
     '''
     Atribut class set
     '''
-    settings = readsettings('settings.yaml')
+    settings = readsettings('./settings/settings.yaml')
     # OPC UA
     ua_url = settings['opcua_server']['url']
     ua_username = settings['opcua_server']['username']

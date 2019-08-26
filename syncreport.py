@@ -100,7 +100,7 @@ def make_file(df, block, date_hour):
 def make_report():
     print('start ', pd.datetime.now())
     # Устанавливаем расчетное время
-    date_hour = get_time_with_delta('-24 hours', 'UTC')
+    date_hour = get_time_with_delta('{} hours'.format(timeshift), 'UTC')
     # Формируем dataframe для каждого блока
     for block in blocks:
         dt = date_hour.strftime("%Y-%m-%dT%H:%M:%SZ")
