@@ -6,15 +6,9 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-opcua = "*"
-cryptography = "*"
-pyqt5 = "*"
-pyqtgraph = "*"
-numpy = "*"
-pyyaml = "*"
-pandas = "*"
 influxdb = "*"
-schedule = "*"
+opcua = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"
