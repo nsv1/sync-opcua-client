@@ -1,0 +1,5 @@
+Монтирование образа:
+docker build -t sync_client .
+
+Запуск контейнера в интерактивном режиме:
+docker run -itd --network=sync_network --name sync -v /host_mnt/c/Users/SNikolaev/.spyder-py3/practice/temp/settings:/usr/src/app/settings sync_client
